@@ -1,6 +1,6 @@
 import UserList from '../components/Users/UserList'
 import {MongoClient} from 'mongodb'
-import Head from 'nexr/head'
+import Head from 'next/head'
 
 export default function Home(props) {
 
