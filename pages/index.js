@@ -1,26 +1,33 @@
-import {useEffect,useState} from 'react'
 import UserList from '../components/Users/UserList'
-import {useRouter} from 'next/router'
-export default function Home() {
-  const router = useRouter()
-  const USERS = [{
-    id:'u1',
-    name:'vismay',
-    image:'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png'
-  },{
-    id:'u2',
-    name:'rana',
-    image:'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png'
-  }]
+import {MongoClient} from 'mongodb'
+import Head from 'nexr/head'
 
-  const [userData,setUserData] = useState(USERS)
-  useEffect(()=>{
-    if(router.query.name!== undefined)
-    setUserData(userData.concat(router.query))
-    router.replace('/')
+export default function Home(props) {
 
-  },[])
   return (
-    <UserList users={userData}/>
+    <>
+    <Head>
+    <title>Home page</title>
+    <meta title='description' content='home page for all listed/ registered usrrs' />
+  </Head>
+    <UserList users={props.users}/>
+    </>
   )
+}
+
+export async function getStaticProps(){
+  const client = await MongoClient.connect('mongodb+srv://admin:amdmin@cluster0.ilnx1.mongodb.net/users')
+  const db = client.db()
+  const collections = db.collection('users')
+  const data = await collections.find().toArray()
+  return{
+    props:{
+      users:data.map(d=>({
+        id:d._id.toString(),
+        name:d.name,
+        image:d.image
+      }))
+    },
+    revalidate:10
+  }
 }

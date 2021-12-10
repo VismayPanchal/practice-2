@@ -5,7 +5,7 @@ import {useRouter} from 'next/router'
 function UserInfo(props) {
   const router = useRouter()
   function showDetails(){
-    router.push({pathname:'/details',query:props})
+    router.replace('/'+props.id)
   }
   return (
     <li className={classes.item}>
