@@ -15,7 +15,7 @@ export default function Home(props) {
   )
 }
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const client = await MongoClient.connect('mongodb+srv://admin:amdmin@cluster0.ilnx1.mongodb.net/users')
   const db = client.db()
   const collections = db.collection('users')
@@ -27,7 +27,6 @@ export async function getStaticProps(){
         name:d.name,
         image:d.image
       }))
-    },
-    revalidate:1
+    }
   }
 }
