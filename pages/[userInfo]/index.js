@@ -8,11 +8,11 @@ function UserInfo(props) {
     <title>User Details</title>
     <meta title='description' content='details of a single user' />
   </Head>
-      <UserDetails
+     {props.id!==undefined && <UserDetails
         id={props.userDetails.id}
         name={props.userDetails.name}
         image={props.userDetails.image}
-      />
+      />}
     </>
   );
 }
