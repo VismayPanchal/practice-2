@@ -14,7 +14,6 @@ function AddUser() {
       },
     });
     const resposne = await res.json()
-    console.log(resposne)
     router.replace('/')
   }
   return <>

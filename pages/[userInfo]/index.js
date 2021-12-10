@@ -12,10 +12,11 @@ function UserInfo(props) {
         id={props.userDetails.id}
         name={props.userDetails.name}
         image={props.userDetails.image}
-      />}
+        />}
     </>
   );
 }
+export default UserInfo;
 
 export async function getStaticPaths() {
   const client = await MongoClient.connect(
@@ -56,4 +57,3 @@ export async function getStaticProps(context) {
   };
 }
 
-export default UserInfo;
