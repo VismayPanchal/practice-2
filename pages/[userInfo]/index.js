@@ -27,7 +27,7 @@ export async function getStaticPaths() {
   const result = await collections.find({}, { _id: 1 }).toArray();
 
   return {
-    fallback: false,
+    fallback: 'blocking',
     paths: result.map((res) => ({
       params: {
         userInfo: res._id.toString(),

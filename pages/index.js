@@ -28,6 +28,6 @@ export async function getStaticProps(){
         image:d.image
       }))
     },
-    revalidate:10
+    revalidate:1
   }
 }
